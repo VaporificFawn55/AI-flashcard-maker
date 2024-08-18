@@ -8,14 +8,14 @@ export default function Home() {
   return (
     <Container maxWidth="lg" sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
       <Head>
-        <title>FlashCard Service</title>
+        <title>Flashy</title>
         <meta name="description" content="Create flashcards from your text" />
       </Head>
 
       <AppBar position="static" sx={{ backgroundColor: '#3f51b5', color: '#fff' }}>
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            FlashCard SaaS
+            Flashy
           </Typography>
           <SignedOut>
             <Button color="inherit" href="/sign-in">Log In</Button>
