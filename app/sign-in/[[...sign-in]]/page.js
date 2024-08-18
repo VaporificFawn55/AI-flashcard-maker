@@ -1,40 +1,52 @@
 import { SignIn } from "@clerk/nextjs";
-import { AppBar, Box, Container, Toolbar, Typography, Button} from "@mui/material";
+import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 import Link from "next/link";
 
-export default function SignUpPage(){
-    return <Container maxWidth="sm">
-        <AppBar position="static" sx={{ backgroundColor: '#f67676'}}>
-            <Toolbar>
-                <Typography
-                variant="h6"
-                sx={{
-                    flexGrow:1,
-                }}
-                >
-                    Flashy
-                </Typography>
-                <Button sx={{ backgroundColor: '#ffffff'}}>
-                    <Link href = "/sign-up" passHref>
-                    Sign up
-                    </Link>
-                </Button>
+export default function SignInPage() {
+  return (
+    <Container maxWidth="sm" sx={{ my: 4 }}>
+      <AppBar position="static" sx={{ backgroundColor: '#ffffff', boxShadow: 3 }}>
+        <Toolbar>
+          <Link href="/" passHref>
+            <Typography
+              variant="h6"
+              sx={{
+                flexGrow: 1,
+                color: '#f67676',
+                textDecoration: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              Flashy
+            </Typography>
+          </Link>
+        </Toolbar>
+      </AppBar>
 
-                <Button sx={{ backgroundColor: '#ffffff'}}>
-                    <Link href = "/sign-in" passHref>
-                    Log in
-                    </Link>
-                </Button>
-            </Toolbar>
-        </AppBar>
-
-        <Box 
-        display={'flex'}
-        flexDirection={'column'}
-        alignItems={'center'}
-        justifyContent={'center'}>
-            <Typography variant="h4" p={3}>Sign in</Typography>
-            <SignIn/>
-        </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          py: 4,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: '#ffffff',
+          p: 3,
+        }}
+      >
+        <Typography variant="h4" gutterBottom sx={{ color: '#f67676' }}>
+          Sign In
+        </Typography>
+        <SignIn
+          style={{
+            width: '100%',
+            maxWidth: '400px',
+            margin: '0 auto',
+          }}
+        />
+      </Box>
     </Container>
+  );
 }
