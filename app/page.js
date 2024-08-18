@@ -38,9 +38,24 @@ export default function Home() {
         <Typography variant="h5" gutterBottom>
           An easy-to-use AI-powered flashcard generator!
         </Typography>
-        <Button variant="contained" color="primary" href="/generate" sx={{ mt: 2 }}>
-          Get Started
-        </Button>
+        <SignedIn>
+          <Box sx={{ mt: 2 }}>
+            <Button variant="contained" color="primary" href="/generate" sx={{ mr: 2 }}>
+              Generate cards
+            </Button>
+            <Button variant="contained" color="primary" href="/flashcards">
+              View Saved Cards
+            </Button>
+          </Box>
+        </SignedIn>
+        <SignedOut>
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            You need to sign in to access the features. Please log in to continue.
+          </Typography>
+          <Button variant="contained" color="primary" href="/sign-in" sx={{ mt: 2 }}>
+            Log In
+          </Button>
+        </SignedOut>
       </Box>
 
       <Box sx={{ my: 8 }}>

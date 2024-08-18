@@ -104,7 +104,7 @@ export default function Generate() {
 
     return (
         <Container maxWidth="md">
-            <AppBar position="static" sx={{ backgroundColor: '#f67676', boxShadow: 3 }}>
+            <AppBar position="static" sx={{ backgroundColor: 'primary', boxShadow: 3 }}>
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Link href="/" passHref>
                         <Typography
@@ -146,7 +146,7 @@ export default function Generate() {
                     variant="contained"
                     onClick={handleSubmit}
                     fullWidth
-                    sx={{ backgroundColor: "#f67676", color: '#ffffff', mt: 2 }}
+                    sx={{ backgroundColor: "primary", color: '#ffffff', mt: 2 }}
                 >
                     Submit
                 </Button>
