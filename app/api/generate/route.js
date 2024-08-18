@@ -1,12 +1,7 @@
-import { NextResponse } from 'next/server';
-import { EndpointServiceClient } from '@google-cloud/aiplatform';
+import {NextResponse} from 'next/server'
+import OpenAI from 'openai'
 
-const projectId = 'flashcards';
-const location = 'us-central1'; // Replace with your desired location
-const endpointId  '';
-const apiKey = process.env.GEMINI_API_KEY;
-
-const systemPrompt =`You are a flashcard creator. Your goal is to creat concise and effective, follow the guidline below
+const systemPrompt = `You are a flashcard creator. Your goal is to creat concise and effective, follow the guidline below
 1.Ensure each flashcard contains only essential information. Avoid lengthy explanations and focus on core concepts or key facts.
 2.Use clear and straightforward language. The question should be precise, and the answer should be direct and unambiguous.
 3.Tailor the content to the specific subject or topic. Ensure that each flashcard addresses a single concept or piece of information.
@@ -18,45 +13,37 @@ const systemPrompt =`You are a flashcard creator. Your goal is to creat concise 
 9.If given a body of text, extract the most important and relevant information for the flashcard.
 10.Aim to create a balanced set of flashcards that covers the topic comprehensively.
 11.Only generate 10 flashcards.
+12. Make the answer to the question one word
 Return in the following JSON format
 {
-"flashcards":[{
-    "front": str,
-    "back": str
-}]
+        "flashcards":[{
+            "front": str,
+            "back": str
+        }]
 }
-`;; 
+`
 
-export async function POST(req) {
-    const data = await req.text();
-  
-    const client = new EndpointServiceClient({
-      projectId,
-      location,
-    });
-  
-    const request = {
-      instances: [
-        {
-          content: `${systemPrompt}\n${data}`,
-        },
-      ],
-      parameters: {
-        // Optional parameters for the model
-      },
-    };
-  
+export async function POST(req){
+    const openai = new OpenAI({ apiKey: process.env.OPEN_API_KEY})
+    const data = await req.text()
     try {
-      const [response] = await client.predict({
-        name: `projects/${projectId}/locations/${location}/endpoints/${endpointId}`,
-        instances: request.instances,
-        parameters: request.parameters,
+      const completion = await openai.chat.completions.create({
+          model: 'gpt-3.5-turbo',
+          messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: data }
+          ]
       });
-  
-      const flashcards = JSON.parse(response.predictions[0].content);
-      return NextResponse.json(flashcards);
-    } catch (error) {
-      console.error(error);
-      return NextResponse.json({ error: 'Something went wrong' });
-    }
+
+      const responseContent = completion.choices[0].message.content;
+      console.log('Completion Response:', responseContent);
+
+      const flashcards = JSON.parse(responseContent);
+
+      return NextResponse.json(flashcards); // Ensure this matches your expected response format
+  } catch (error) {
+      console.error('API Error:', error);
+      return NextResponse.json({ error: 'Failed to generate flashcards.' }, { status: 500 });
   }
+}
+

@@ -35,7 +35,7 @@ export default function Home() {
             {` `}
             Advertising Bull
             </Typography>
-            <Button variant="contained" color="primary" sx={{mt: 2}}>Get started</Button>
+            <Button variant="contained" color="primary" href="/generate" sx={{mt: 2}}>Get started</Button>
         </Box>
         <Box sx = {{my: 6}}>
           <Typography variant="h4">
