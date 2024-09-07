@@ -5,7 +5,7 @@ import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAZBPeB6My7zkqPzHNA4VK8MPI6hvHcvis",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "flashcards-c49dc.firebaseapp.com",
   projectId: "flashcards-c49dc",
   storageBucket: "flashcards-c49dc.appspot.com",
